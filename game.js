@@ -72,7 +72,7 @@ function send(eventName, payload) {
 }
 
 ws.addEventListener('message', event => {
-  // console.log(`Message from server: ${event.data}`)
+  console.log(`Message from server: ${event.data}`)
   const data = JSON.parse(event.data)
   switch (data.eventName) {
     case 'uuid-res':
@@ -93,18 +93,23 @@ ws.addEventListener('message', event => {
 
       const myEl = getEl('myName')
       const opEl = getEl('enemyName')
-      myEl.innerText = 'Me: ' + state.username
-      opEl.innerText = 'Opponent: ' + data.opponent
+      myEl.innerText = 'Me: ' + state.username + '    Lives: ' + data.lives
+      opEl.innerText = 'Opponent: ' + data.opponent.username + '    Lives: ' + data.opponent.lives
 
       if (state.q.url !== '') {
         const img = document.createElement('img')
         const imgParent = document.getElementById('imgContainer')
+        while (imgParent.firstChild) {
+          imgParent.removeChild(imgParent.firstChild)
+        }
         img.src = state.q.url
         imgParent.appendChild(img)
       }
       break
     case 'round-end':
       setState(GameState.WAIT)
+      const msgEl = getEl('roundMessage')
+      msgEl.innerText = data.msg
       break
     case 'elim':
       setState(GameState.LOST)
