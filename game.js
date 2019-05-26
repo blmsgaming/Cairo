@@ -44,7 +44,7 @@ let state = {
 // WEBSOCKETS
 //
 
-url = 'ws://65887383.ngrok.io'
+url = 'ws://daad93b2.ngrok.io'
 
 ws = new WebSocket(url)
 
@@ -95,6 +95,13 @@ ws.addEventListener('message', event => {
       const opEl = getEl('enemyName')
       myEl.innerText = 'Me: ' + state.username
       opEl.innerText = 'Opponent: ' + data.opponent
+
+      if (state.q.url !== '') {
+        const img = document.createElement('img')
+        const imgParent = document.getElementById('imgContainer')
+        img.src = state.q.url
+        imgParent.appendChild(img)
+      }
       break
     case 'round-end':
       setState(GameState.WAIT)
