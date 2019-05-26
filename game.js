@@ -72,7 +72,7 @@ function send(eventName, payload) {
 }
 
 ws.addEventListener('message', event => {
-  console.log(`Message from server: ${event.data}`)
+  // console.log(`Message from server: ${event.data}`)
   const data = JSON.parse(event.data)
   switch (data.eventName) {
     case 'uuid-res':
@@ -141,10 +141,6 @@ function sendUsername() {
   send('user-join', { username: username })
   setState(GameState.LOBBY)
   refreshLobbyList()
-}
-
-function requestStartGame() {
-  send('game-start-req', {})
 }
 
 // Grab all connected users and put in state.users
