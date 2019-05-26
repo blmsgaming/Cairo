@@ -1,0 +1,61 @@
+<html>
+
+<head>
+  <title>Trivia Royale</title>
+  <script src="game.js"></script>
+  <link rel="Welcome" href="styles.css">
+</head>
+
+<body>
+  <div id="welcome">
+    <h1> Trivia Royale </h1>
+    What would you like to be called:<br>
+    <input type="text" id="player" name="name"><br><br>
+    <input type="submit" value="Submit" onclick="sendUsername()">
+    <h1 id="name"></h1>
+  </div>
+  <div id="lobby">
+    <ul id="playerlist">
+      <li>Daily reminder that Vishal needs to find a homecoming date</li>
+    </ul>
+    <button id="butt" onclick="requestStartGame()">Start Game</button>
+  </div>
+  <div id="battle">
+    <center>
+      <h1 id="question"></h1>
+      <input type="radio" id="choice0" name="answer" onclick="sendAnswer(0)"><br>
+      <label for="choice0"></label>
+      <input type="radio" id="choice1" name="answer" onclick="sendAnswer(1)"><br>
+      <label for="choice1"></label>
+      <input type="radio" id="choice2" name="answer" onclick="sendAnswer(2)"><br>
+      <label for="choice2"></label>
+      <input type="radio" id="choice3" name="answer" onclick="sendAnswer(3)"><br>
+      <label for="choice3"></label>
+    </center>
+  </div>
+  <div id="blessed" align="center">
+    <h2 align="center">You have been exempted from battle, for now</h2>
+    <p align="center"> The gods have blessed you momentarily, rest warrior <p>
+        <img src="https://mmorpg.net/wp-content/uploads/2018/11/feelsgoodman.png" alt="FeelsGoodMan">
+  </div>
+  </div>
+  <div id="lost" align="center">
+    <h2 align="center">You have been defeated</h2>
+    <p align="center"> Better luck next time <p>
+        <p align="center">Try studying more <p>
+            <img src="https://i.imgur.com/JlXtPpf.png" alt="PepeHands">
+  </div>
+  <div id="victory" align="center">
+    <h2 align="center">Congrats, you are GOATED on the Trivia</h2>
+    <p align="center">See you again on the battlefield, Champion <p>
+        <img src="https://pbs.twimg.com/profile_images/978399767922266112/JPDlwZve_400x400.jpg" alt="Literally Goated">
+  </div>
+  <div id="wait" align="center">
+    <h1 align="center" id="timeLeft"></h1>
+    <h2 align="center">You have won your battle, but not the war</h2>
+    <p align="center"> Prepare for your next endeavor</p>
+    <img src="https://i.kym-cdn.com/photos/images/original/001/248/330/675.jpg" alt="ResidentSleeper">
+  </div>
+</body>
+
+</html>
