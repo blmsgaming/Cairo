@@ -101,6 +101,8 @@ ws.addEventListener('message', event => {
       break
     case 'elim':
       setState(GameState.LOST)
+      const elimEl = getEl('elimMessage')
+      elimEl.innerText = 'Because: ' + data.reason
       break
     case 'round-tick':
       const quesEl = document.getElementById('questionTime')
@@ -160,7 +162,7 @@ function refreshLobbyList() {
 
 function sendAnswer(idx) {
   send('round-res', { idx: idx })
-  setState(GameState.WAIT)
+  // setState(GameState.WAIT)
 
 }
 
