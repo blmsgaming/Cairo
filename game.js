@@ -36,14 +36,15 @@ function getEl(id) {
 
 let state = {
   users: [],
-  state: GameState.WELCOME
+  state: GameState.WELCOME,
+  username: ''
 }
 
 //
 // WEBSOCKETS
 //
 
-url = 'ws://b81927e3.ngrok.io'
+url = 'ws://65887383.ngrok.io'
 
 ws = new WebSocket(url)
 
@@ -89,26 +90,33 @@ ws.addEventListener('message', event => {
       setState(GameState.BATTLE)
       const questEl = document.getElementById('question')
       questEl.innerText = state.q.question
-      console.log("Question set")
+
+      const myEl = getEl('myName')
+      const opEl = getEl('enemyName')
+      myEl.innerText = 'Me: ' + state.username
+      opEl.innerText = 'Opponent: ' + data.opponent
       break
     case 'round-end':
-      if (data.correct) {
-        setState(GameState.VICTORY)
-        console.log('Answer was correct!')
-      } else {
-        setState(GameState.LOST)
-        console.log('Wrong answer')
-      }
+      setState(GameState.WAIT)
+      break
+    case 'elim':
+      setState(GameState.LOST)
       break
     case 'round-tick':
+      const quesEl = document.getElementById('questionTime')
+      quesEl.innerText = `${Math.round(data.timeLeft/1000)} seconds left in this round`
       const timeEl = document.getElementById('timeLeft')
-      timeEl.innerText = `${data.timeLeft} milliseconds left in this round`
+      timeEl.innerText = `${Math.round(data.timeLeft/1000)} seconds left in this round`
       break
     case 'game-start':
       setState(GameState.BATTLE)
       break
     case 'game-end':
       console.log('Game ended!')
+      break
+    case 'game-winner':
+      console.log('I won!')
+      setState(GameState.VICTORY)
       break
     case 'lobby-res':
       state.users = data.users
@@ -120,6 +128,7 @@ ws.addEventListener('message', event => {
 
 function sendUsername() {
   const username = document.getElementById('player').value
+  state.username = username
   send('user-join', { username: username })
   setState(GameState.LOBBY)
   refreshLobbyList()

@@ -21,8 +21,11 @@
     <button id="butt" onclick="requestStartGame()">Start Game</button>
   </div>
   <div id="battle">
+    <h2 align="left" id="myName"></h2>
+    <h2 align="left" id="enemyName"></h2>
     <center>
       <h1 id="question"></h1>
+      <h2 id="questionTime"></h2>
       <input type="radio" id="choice0" name="answer" onclick="sendAnswer(0)"><br>
       <label for="choice0"></label>
       <input type="radio" id="choice1" name="answer" onclick="sendAnswer(1)"><br>
